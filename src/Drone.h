@@ -118,6 +118,9 @@ public:
         glVertexAttrib3f( locColor, BLANC.r, BLANC.g, BLANC.b ); // blanc
 
         // afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+        matrModel.Rotate(angleCorps, 0, 1, 0);
+        matrModel.Translate(position.x, position.y, position.z);
+        matrModel.Scale(taille, taille, taille);
 
         //Afficher la boite
         // afficher le bon modèle
@@ -127,7 +130,6 @@ public:
         case 1: // un cube
             matrModel.PushMatrix(); {
                 matrModel.Scale( 2.0, 1.0, 2.0 );
-                matrModel.Translate( 0.0, 0.5, 0.0 ); // (bidon) À MODIFIER
                 glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
                 afficherCube();
             }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
@@ -156,7 +158,7 @@ public:
     
         // Son mat
         matrModel.PushMatrix(); {
-            matrModel.Translate(2.25, 1.0, 2.25);
+            matrModel.Translate(2.25, 0.5, 2.25);
             matrModel.Rotate(-90, 1.0, 0.0, 0.0);
             matrModel.Scale(0.1, 0.1, 0.5);
             glVertexAttrib3f(locColor, CYAN.r, CYAN.g, CYAN.b); // cyan
@@ -166,7 +168,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(-2.25, 1.0, -2.25);
+            matrModel.Translate(-2.25, 0.5, -2.25);
             matrModel.Rotate(-90, 1.0, 0.0, 0.0);
             matrModel.Scale(0.1, 0.1, 0.5);
             glVertexAttrib3f(locColor, CYAN.r, CYAN.g, CYAN.b); // cyan
@@ -176,7 +178,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(2.25, 1.0, -2.25);
+            matrModel.Translate(2.25, 0.5, -2.25);
             matrModel.Rotate(-90, 1.0, 0.0, 0.0);
             matrModel.Scale(0.1, 0.1, 0.5);
             glVertexAttrib3f(locColor, CYAN.r, CYAN.g, CYAN.b); // cyan
@@ -186,7 +188,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(-2.25, 1.0, 2.25);
+            matrModel.Translate(-2.25, 0.5, 2.25);
             matrModel.Rotate(-90, 1.0, 0.0, 0.0);
             matrModel.Scale(0.1, 0.1, 0.5);
             glVertexAttrib3f(locColor, CYAN.r, CYAN.g, CYAN.b); // cyan
@@ -195,12 +197,13 @@ public:
             afficherCylindre();
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
         
+
         // ajouter une ou des transformations afin de tracer des *pales carrées*, de la même largeur que le corps
         matrModel.PushMatrix(); {
             // donner la couleur de la première pale
             glVertexAttrib3f(locColor, VIOLET.r, VIOLET.g, VIOLET.b); // violet
 
-            matrModel.Translate(-2.25, 1.25, 2.375);
+            matrModel.Translate(-2.25, 0.75, 2.375);
             // (bidon) À MODIFIER
             afficherRepereCourant();
 
@@ -234,6 +237,120 @@ public:
             
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
+        matrModel.PushMatrix(); {
+            // donner la couleur de la première pale
+            glVertexAttrib3f(locColor, VIOLET.r, VIOLET.g, VIOLET.b); // violet
+
+            matrModel.Translate(2.25, 0.75, 2.375);
+            // (bidon) À MODIFIER
+            afficherRepereCourant();
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
+
+
+            //// donner la couleur de la seconde pale
+            glVertexAttrib3f(locColor, VERT.r, VERT.g, VERT.b); // vert
+            matrModel.Rotate(20, 0.0, 1.0, 0.0);
+            matrModel.Translate(0, 0.25, 0);
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix();
+
+
+
+
+        }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
+        matrModel.PushMatrix(); {
+            // donner la couleur de la première pale
+            glVertexAttrib3f(locColor, VIOLET.r, VIOLET.g, VIOLET.b); // violet
+
+            matrModel.Translate(-2.25, 0.75, -2.375);
+            // (bidon) À MODIFIER
+            afficherRepereCourant();
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
+
+
+            //// donner la couleur de la seconde pale
+            glVertexAttrib3f(locColor, VERT.r, VERT.g, VERT.b); // vert
+            matrModel.Rotate(20 + anglePale, 0.0, 1.0, 0.0);
+            matrModel.Translate(0, 0.25, 0);
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix();
+
+
+
+
+        }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
+        matrModel.PushMatrix(); {
+            // donner la couleur de la première pale
+            glVertexAttrib3f(locColor, VIOLET.r, VIOLET.g, VIOLET.b); // violet
+
+            matrModel.Translate(2.25, 0.75, -2.375);
+            // (bidon) À MODIFIER
+            afficherRepereCourant();
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
+
+
+            //// donner la couleur de la seconde pale
+            glVertexAttrib3f(locColor, VERT.r, VERT.g, VERT.b); // vert
+            matrModel.Rotate(20, 0.0, 1.0, 0.0);
+            matrModel.Translate(0, 0.25, 0);
+
+            matrModel.PushMatrix(); {
+                matrModel.Rotate(-90, 1.0, 0.0, 0.0);
+                matrModel.Translate(-1.5, 0.0, 0);
+                matrModel.Scale(3.0, 0.2, 1.0);
+                //afficherRepereCourant( ); // débogage: montrer le repère à la position courante
+                glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+                afficherQuad();
+            }matrModel.PopMatrix();
+
+
+
+
+        }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
+
     }
 
     // TODO:
@@ -247,7 +364,7 @@ public:
 
         // ajouter une ou des transformations afin de tracer chacune des supports
         matrModel.PushMatrix();{
-            matrModel.Translate( 1.0, 0.5, 1.0 ); // (bidon) À MODIFIER
+            matrModel.Translate( 1.0, 0, 1.0 ); 
             matrModel.Rotate(45, 0.0, 1.0, 0.0);
             matrModel.Scale(0.5, 0.5, 2.0);
             // afficherRepereCourant( ); // débogage: montrer le repère à la position courante
@@ -256,7 +373,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv( locmatrModel, 1, GL_FALSE, matrModel );
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(-1.0, 0.5, 1.0); // (bidon) À MODIFIER
+            matrModel.Translate(-1.0, 0, 1.0); // (bidon) À MODIFIER
             matrModel.Rotate(-45, 0.0, 1.0, 0.0);
             matrModel.Scale(0.5, 0.5, 2.0);
             // afficherRepereCourant( ); // débogage: montrer le repère à la position courante
@@ -265,7 +382,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(1.0, 0.5, -1.0); // (bidon) À MODIFIER
+            matrModel.Translate(1.0, 0, -1.0); // (bidon) À MODIFIER
             matrModel.Rotate(135, 0.0, 1.0, 0.0);
             matrModel.Scale(0.5, 0.5, 2.0);
             // afficherRepereCourant( ); // débogage: montrer le repère à la position courante
@@ -274,7 +391,7 @@ public:
         }matrModel.PopMatrix(); glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
 
         matrModel.PushMatrix(); {
-            matrModel.Translate(-1.0, 0.5, -1.0); // (bidon) À MODIFIER
+            matrModel.Translate(-1.0, 0, -1.0); // (bidon) À MODIFIER
             matrModel.Rotate(-135, 0.0, 1.0, 0.0);
             matrModel.Scale(0.5, 0.5, 2.0);
             // afficherRepereCourant( ); // débogage: montrer le repère à la position courante
@@ -295,11 +412,13 @@ public:
             //   est placé à la position courante « position[] »,
             //   est orienté selon l'angle « angleCorps » et
             //   est de taille ( taille, taille, taille ),
+            std::cout << " position : " <<position.x;
 
             // TODO: Utiliser les fonctions afficherCorps, afficherRotor et afficherSupport
             afficherCorps();
             afficherRotor();
-            afficherSupport();           
+            afficherSupport(); 
+            calculerPhysique();
 
         }matrModel.PopMatrix(); glUniformMatrix4fv( locmatrModel, 1, GL_FALSE, matrModel );
     }
