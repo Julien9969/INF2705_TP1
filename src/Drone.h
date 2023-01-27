@@ -76,7 +76,9 @@ public:
         // créer le VBO pour les sommets
         GLuint vboTheiereSommets;
         glGenBuffers(1, &vboTheiereSommets);
+
         glBindBuffer(GL_ARRAY_BUFFER, vboTheiereSommets);
+
         glBufferData(GL_ARRAY_BUFFER, sizeof(gTheiereSommets), gTheiereSommets, GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(locVertex);
@@ -91,9 +93,6 @@ public:
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(gTheiereConnec), gTheiereConnec, GL_STATIC_DRAW);
 
         glBindVertexArray(0);
-
-
-        // Spécification pour les sommets et les triangles :
         
     }
 
@@ -154,6 +153,7 @@ public:
 
         case 2: // la théière
             matrModel.PushMatrix(); {
+                matrModel.Translate(0,-1.0,0); 
                 matrModel.Scale( 0.5, 0.5, 0.5 );
                 glUniformMatrix4fv(locmatrModel, 1, GL_FALSE, matrModel);
                 afficherTheiere();
